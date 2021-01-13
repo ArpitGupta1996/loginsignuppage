@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Sign Up Page Using Authentication</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            .er{
+                color:white;
+            }
+            .GFG { 
+            background-color: white; 
+            border: 1px solid #8c8080; 
+            color: black; 
+            padding: 2px 10px; 
+            {% comment %} text-align: center;  {% endcomment %}
+            {% comment %} display: inline-block;  {% endcomment %}
+            font-size: 12px; 
+            margin: -14px 59px; 
+            cursor: pointer; 
+        } 
+        </style>
+    </head>
+    <body style="background-color: #ff9900; text-align:right; margin-top:90px; margin-right:560px; display: block;">
+        <h1> Sign Up Here</h1>
+        <form action="" method="post" novalidate> 
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    <p class="er">{{error}}</p>
+                {% endfor %}
+            {% endif %}
+            {% for fm in form %} <!--for removing all default errors which are seeing-->
+                {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br><br>
+            {% endfor %}
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+        {% if messages %}
+            {% for message in messages %}
+                <small {% if message.tags %} class="{{message.tags}}"{% endif %}>{{message}}</small>
+            {% endfor %}
+        {% endif %}
+        <a href="{% url 'login' %}"><button class="GFG">Login</button></a>
+    </body>
+</html>
